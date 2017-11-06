@@ -1,7 +1,19 @@
-<div *ngIf="song">
-    <span class='rank-badge'>{{song.rank}}</span>
-    <input [(ngModel)]="song.song" placeholder="Nome"/>
-    <input [(ngModel)]="song.artist" placeholder="Artista"/>
-    <button (click)="save()">Salvar</button>
-    <button (click)="delete()">Excluir</button>    
+<div *ngIf="song" class="row">
+    <form (ngSubmit)="save()" #songForm="ngForm">        
+        <div class="input-field">
+            <input [(ngModel)]="song.rank" placeholder="Posição da música no ranking" name="rank" id="rank" type="number" required/>
+            <label class="active" for="rank">Posição</label>
+        </div>
+        <div class="input-field">
+            <input [(ngModel)]="song.song" placeholder="Digite o nome da música" name="name" id="name" type="text" required/>
+            <label class="active" for="name">Nome</label>
+        </div>
+        <div class="input-field">
+            <input [(ngModel)]="song.artist" placeholder="Digite o nome do artista" name="artist" id="artist" type="text" required/>
+            <label class="active" for="artist">Artista</label>
+        </div>
+
+        <button type="button" (click)="delete()" [disabled]="!song.id">Excluir</button>        
+        <button type="submit" [disabled]="!songForm.form.valid">Salvar</button>
+    </form>
 </div>
