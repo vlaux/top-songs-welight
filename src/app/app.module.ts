@@ -25,6 +25,10 @@ import { ListComponent } from './list.component';
         component: ListComponent
       },
       {
+        path: 'song',
+        component: SongComponent,
+      },
+      {
         path: 'song/:id',
         component: SongComponent,
       },

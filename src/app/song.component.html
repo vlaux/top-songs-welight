@@ -2,4 +2,6 @@
     <span class='rank-badge'>{{song.rank}}</span>
     <input [(ngModel)]="song.song" placeholder="Nome"/>
     <input [(ngModel)]="song.artist" placeholder="Artista"/>
+    <button (click)="save()">Salvar</button>
+    <button (click)="delete()">Excluir</button>    
 </div>
