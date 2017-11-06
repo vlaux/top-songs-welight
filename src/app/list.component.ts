@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DecimalPipe, NgClass } from '@angular/common';
 import { Song } from './song';
 import { SongService } from './song.services';
 
@@ -9,11 +10,19 @@ import { SongService } from './song.services';
 
 export class ListComponent implements OnInit {
     songs;
+    meta;
 
     constructor(private songService: SongService) { };
 
+    loadSongs(url? : string) {
+        this.songService.getSongs(url).then(response => {
+            this.songs = response.songs;
+            this.meta = response.meta;
+        })
+    }
+
     ngOnInit() {
-        this.songService.getSongs().then(songs => this.songs = songs);
+        this.loadSongs();
     };
     
 }

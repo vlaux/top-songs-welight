@@ -1,10 +1,31 @@
-<div *ngIf="!songs">Nenhuma música disponível</div>
-<ul *ngIf="songs" class="collection">
-    <li *ngFor="let song of songs" class="collection-item avatar">
-        <i class="circle">{{song.rank}}</i>
-        <span class="title">{{song.song}}</span>
-        <p>{{song.artist}}</p>
+<div class="container">
+    <div *ngIf="!songs" class="progress">
+        <div class="indeterminate"></div>
+    </div>
 
-        <a href="song/{{song.id}}" class="secondary-content"><i class="material-icons">mode_edit</i></a>
-    </li>
-</ul>
+    <ul *ngIf="songs" class="collection">
+        <li *ngFor="let song of songs" class="collection-item avatar">
+            <i class="circle">{{song.rank}}</i>
+            <span class="title">{{song.song}}</span>
+            <p>{{song.artist}}</p>
+            
+            <a href="song/{{song.id}}" class="secondary-content" title="Editar">
+                <i class="material-icons">mode_edit</i>
+            </a>
+        </li>
+    </ul>
+
+    <ul *ngIf="meta" class="pagination center">
+        <li [ngClass]="{'waves-effect': meta.previous, 'disabled': !meta.previous}" (click)="loadSongs(meta.previous)">
+            <i class="material-icons">chevron_left</i>
+        </li>
+
+        <li>
+            Página {{meta.offset/meta.limit + 1}} de {{((meta.total_count/meta.limit) | number:'.0-0')}}
+        </li>
+
+        <li [ngClass]="meta.next ? 'waves-effect' : 'disabled'" (click)="loadSongs(meta.next)">
+            <i class="material-icons">chevron_right</i>
+        </li>
+    </ul>
+</div>
