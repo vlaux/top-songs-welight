@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Song } from './song';
+import { Metadata } from './metadata';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,21 +12,25 @@ export class SongService {
     private songsUrl = 'api/v1/song/';
     private headers = new Headers({'Content-Type': 'application/json'});
     
-
     constructor(private http: Http) { };
     
-    getSongs(url?: string): Promise<{songs: Song[], meta: Object}> {
+    getSongs(url?: string): Promise<{songs: Song[], meta: Metadata}> {
         return this.http.get(`${SERVICE_URL}${url ? url : this.songsUrl}`)
             .toPromise()
-            .then(response => {return {'songs': response.json().objects as Song[], 'meta': response.json().meta as Object}})
-            .catch(e => console.error(e));
+            .then(response => {
+                return {
+                    'songs': response.json().objects as Song[], 
+                    'meta': response.json().meta as Metadata
+                }
+            })
+            .catch(this.handleError);
     };
 
     getSong(id: number): Promise<Song> {
         return this.http.get(`${SERVICE_URL}${this.songsUrl}${id}/`)
             .toPromise()
             .then(response => response.json() as Song)
-            .catch(e => console.error(e));
+            .catch(this.handleError);
     };
 
     createSong(song: Song): Promise<Song> {
@@ -34,7 +39,7 @@ export class SongService {
                 {headers: this.headers})
             .toPromise()
             .then(response => response.json() as Song)
-            .catch(e => console.error(e));
+            .catch(this.handleError);
     }
 
     saveSong(song: Song): Promise<Song> {
@@ -43,13 +48,18 @@ export class SongService {
                 {headers: this.headers})
             .toPromise()
             .then(response => response.json() as Song)
-            .catch(e => console.error(e));
+            .catch(this.handleError);
     };
 
     deleteSong(songId: number) : Promise<boolean> {
         return this.http.delete(`${SERVICE_URL}${this.songsUrl}${songId}/`)
             .toPromise()
             .then(response => true)
-            .catch(e => console.error(e));
+            .catch(this.handleError);
     }
+
+    private handleError(error: any): Promise<any> {
+        console.error(error);
+        return Promise.reject(error.message || error);
+      }
 }

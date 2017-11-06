@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { Song } from './song';
+import { Metadata } from './metadata';
 import { SongService } from './song.services';
 
 @Component({
@@ -9,8 +10,8 @@ import { SongService } from './song.services';
 })
 
 export class ListComponent implements OnInit {
-    songs;
-    meta;
+    songs: Song[];
+    meta: Metadata;
 
     constructor(private songService: SongService) { };
 
