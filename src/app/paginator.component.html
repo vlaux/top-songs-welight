@@ -1,0 +1,13 @@
+<ul *ngIf="meta" class="pagination center">
+    <li [ngClass]="{'waves-effect': meta.previous, 'disabled': !meta.previous}" (click)="loadSongs(meta.previous)">
+        <i class="material-icons">chevron_left</i>
+    </li>
+
+    <li>
+        Página {{meta.offset/meta.limit + 1}} de {{((meta.total_count/meta.limit) | round )}}
+    </li>
+
+    <li [ngClass]="meta.next ? 'waves-effect' : 'disabled'" (click)="loadSongs(meta.next)">
+        <i class="material-icons">chevron_right</i>
+    </li>
+</ul>

@@ -8,12 +8,16 @@ import { SongService } from './song.services';
 import { AppComponent } from './app.component';
 import { SongComponent } from './song.component';
 import { ListComponent } from './list.component';
+import { PaginatorComponent } from './paginator.component';
+import { RoundPipe } from './round.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     SongComponent,
+    PaginatorComponent,
+    RoundPipe,
   ],
   imports: [
     BrowserModule,
