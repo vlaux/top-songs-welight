@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DecimalPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Song } from './song';
 import { Metadata } from './metadata';
 import { SongService } from './song.services';
