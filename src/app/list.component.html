@@ -1,7 +1,10 @@
-<h2>Músicas</h2>
 <div *ngIf="!songs">Nenhuma música disponível</div>
-<ul *ngIf="songs" class="songs-list">
-    <li *ngFor="let song of songs">
-        {{song.song}} - {{song.artist}}
+<ul *ngIf="songs" class="collection">
+    <li *ngFor="let song of songs" class="collection-item avatar">
+        <i class="circle">{{song.rank}}</i>
+        <span class="title">{{song.song}}</span>
+        <p>{{song.artist}}</p>
+
+        <a href="song/{{song.id}}" class="secondary-content"><i class="material-icons">mode_edit</i></a>
     </li>
 </ul>

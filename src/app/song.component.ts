@@ -39,7 +39,6 @@ export class SongComponent {
         this.songService.deleteSong(this.song.id)
             .then(r => {
                 this.router.navigate(['/list']);
-                return true;
             });
     }
 
