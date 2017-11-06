@@ -1,5 +1,11 @@
-<div *ngIf="song" class="row">
-    <form (ngSubmit)="save()" #songForm="ngForm">        
+<div *ngIf="song" class="container">
+    <a href="/list">
+        <i class="material-icons">keyboard_arrow_left</i>            
+        <span>Voltar para a lista</span>            
+    </a>
+
+    <form (ngSubmit)="save()" #songForm="ngForm">
+        <h3>Editar detalhes</h3>
         <div class="input-field">
             <input [(ngModel)]="song.rank" placeholder="Posição da música no ranking" name="rank" id="rank" type="number" required/>
             <label class="active" for="rank">Posição</label>
@@ -13,7 +19,13 @@
             <label class="active" for="artist">Artista</label>
         </div>
 
-        <button type="button" (click)="delete()" [disabled]="!song.id">Excluir</button>        
-        <button type="submit" [disabled]="!songForm.form.valid">Salvar</button>
+        <button class="btn waves-effect waves-light left" type="button" (click)="delete()" [disabled]="!song.id">
+            <i class="material-icons left">delete</i>
+            Excluir
+        </button>  
+        <button class="btn waves-effect waves-light right" type="submit" [disabled]="!songForm.form.valid">
+            <i class="material-icons left">save</i>
+            Salvar
+        </button>
     </form>
 </div>
